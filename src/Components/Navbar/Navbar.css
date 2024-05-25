@@ -4,7 +4,8 @@
     align-items: center;
     margin: 10px 120px;
     color: white;
-
+    text-shadow: 0 0 5px  #212222;  /* adding text shadow  */
+   
 
 
 }
@@ -19,8 +20,11 @@
     display: flex;
     align-items: center;
     list-style: none;
-    font-size: 18px;
+    font-size: 20px;
+    font-weight: 500; /*added font weight */
     gap: 90px;
+    text-shadow: 0 0 4px black;/*added text shadow to navbar*/
+    
 }
 
 li {
@@ -32,5 +36,6 @@ li {
     padding: 10px 38px;
     background: #fff;
     color: #262626;
+    text-shadow: none;
 
 }

@@ -10,6 +10,8 @@
     position: fixed;
     object-fit: cover;
     z-index: -1;
+    opacity: .9; 
+    /* adding opacity */
 
 
 }
