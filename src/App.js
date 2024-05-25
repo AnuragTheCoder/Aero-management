@@ -1,13 +1,11 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
-import SplienModel from './models/SplineModel.js';
-import NavBar from './models/NavBar.js';
+import Header from './Components/Header';
 
 function App() {
   return (
     <div className="App">
-      <NavBar/>
-      <SplienModel/>
+      <Header />
     </div>
   );
 }
