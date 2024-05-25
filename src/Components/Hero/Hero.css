@@ -6,6 +6,8 @@
 
 .hero-text {
     color: #FFF;
+    text-shadow: 0 0 15px  #292929; 
+    /* adding text shadow  */
     font-size: 110px;
     font-weight: 500;
     line-height: 100px;
