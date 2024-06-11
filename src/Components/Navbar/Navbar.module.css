@@ -4,8 +4,11 @@
     align-items: center;
     margin: 10px 120px;
     color: white;
-    text-shadow: 0 0 5px  #212222;  /* adding text shadow  */
-   
+    text-shadow: 0 0 5px #212222;
+    position: sticky;
+
+    /* adding text shadow  */
+
 
 
 }
@@ -21,10 +24,12 @@
     align-items: center;
     list-style: none;
     font-size: 20px;
-    font-weight: 500; /*added font weight */
+    font-weight: 500;
+    /*added font weight */
     gap: 90px;
-    text-shadow: 0 0 4px black;/*added text shadow to navbar*/
-    
+    /* text-shadow: 0 0 4px black; */
+    /*added text shadow to navbar*/
+
 }
 
 li {
@@ -38,4 +43,13 @@ li {
     color: #262626;
     text-shadow: none;
 
+}
+
+
+
+.nav-menu li.active,
+.nav-menu li:hover,
+.active {
+
+    color: #EB635E
 }

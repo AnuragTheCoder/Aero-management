@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 
 import Background from './Background/Background';
 import { useState } from 'react';
-import Navbar from './Navbar/Navbar';
 import Hero from './Hero/Hero';
 const Header = () => {
     let heroData = [
@@ -29,7 +28,6 @@ const Header = () => {
         <div>
 
             <Background heroCount={heroCount} playStatus={playStatus} />
-            <Navbar />
             <Hero setPlayStatus={setPlayStatus} heroData={heroData} heroCount={heroCount} setHeroCount={setHeroCount} playStatus={playStatus} />
         </div>
     )

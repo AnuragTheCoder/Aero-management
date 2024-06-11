@@ -1,0 +1,20 @@
+.footerr {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    position: relative;
+    bottom: 0px;
+    /* Start hidden below the viewport */
+    transition: bottom 4s ease;
+    /* Smooth transition for visibility */
+    z-index: 2000;
+    /* Ensure footer is on top of content */
+}
+
+.footerr.show {
+    bottom: 0;
+    /* Show the footer */
+}

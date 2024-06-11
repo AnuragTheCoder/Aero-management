@@ -1,39 +1,50 @@
-import React from 'react'
-import './Hero.css'
-
-import arrow_btn from '../../Assets/arrow_btn.png'
-import play_icon from '../../Assets/play_icon.png'
-import pause_icon from '../../Assets/pause_icon.png'
-
-
+import React from 'react';
+import { Link } from 'react-router-dom';
+import styles from './Hero.module.css';
+import arrowBtn from '../../Assets/arrow_btn.png';
+import playIcon from '../../Assets/play_icon.png';
+import pauseIcon from '../../Assets/pause_icon.png';
 
 const Hero = ({ heroData, setHeroCount, heroCount, setPlayStatus, playStatus }) => {
     return (
-        <div className='hero'>
-            <div className="hero-text">
+        <div className={styles.hero}>
+            <div className={styles.heroText}>
                 <p>{heroData[heroCount].text1}</p>
                 <p>{heroData[heroCount].text2}</p>
             </div>
-            <div className='merge'>
-                <div className="hero-explore">
-                    <p>Explore the features</p>
-                    <img src={arrow_btn} alt="" />
-                </div>
-                <div className="hero-play">
-                    <img onClick={() => setPlayStatus(!playStatus)} src={playStatus ? pause_icon : play_icon} alt="" />
+            <div className={styles.merge}>
+                <Link to="/register">
+                    <div className={styles.heroExplore}>
+                        <p>Register To Proceed</p>
+                        <img src={arrowBtn} alt="Arrow Button" />
+                    </div>
+                </Link>
+                <div className={styles.heroPlay}>
+                    <img
+                        onClick={() => setPlayStatus(!playStatus)}
+                        src={playStatus ? pauseIcon : playIcon}
+                        alt="Play/Pause Icon"
+                    />
                 </div>
             </div>
-
-            <div className="hero-dot-play">
-                <ul className="hero-dots">
-                    <li onClick={() => setHeroCount(0)} className={heroCount === 0 ? "hero-dot-orange" : "hero-dot"}></li>
-                    <li onClick={() => setHeroCount(1)} className={heroCount === 1 ? "hero-dot-orange" : "hero-dot"}></li>
-                    <li onClick={() => setHeroCount(2)} className={heroCount === 2 ? "hero-dot-orange" : "hero-dot"}></li>
+            <div className={styles.heroDotPlay}>
+                <ul className={styles.heroDots}>
+                    <li
+                        onClick={() => setHeroCount(0)}
+                        className={heroCount === 0 ? styles.heroDotOrange : styles.heroDot}
+                    ></li>
+                    <li
+                        onClick={() => setHeroCount(1)}
+                        className={heroCount === 1 ? styles.heroDotOrange : styles.heroDot}
+                    ></li>
+                    <li
+                        onClick={() => setHeroCount(2)}
+                        className={heroCount === 2 ? styles.heroDotOrange : styles.heroDot}
+                    ></li>
                 </ul>
-
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Hero
+export default Hero;

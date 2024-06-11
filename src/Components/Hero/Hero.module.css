@@ -1,20 +1,19 @@
+/* Hero Styles */
+
 .hero {
     margin: 0px 120px;
     margin-top: 270px;
-
 }
 
-.hero-text {
+.heroText {
     color: #FFF;
-    text-shadow: 0 0 15px  #292929; 
-    /* adding text shadow  */
+    text-shadow: 0 0 15px #292929;
     font-size: 110px;
     font-weight: 500;
     line-height: 100px;
-
 }
 
-.hero-explore {
+.heroExplore {
     display: flex;
     align-items: center;
     gap: 50px;
@@ -26,31 +25,28 @@
     border-radius: 60px;
     cursor: pointer;
     background-color: #FFF;
-
 }
 
-.hero-explore p {
+.heroExplore p {
     color: #292929;
     font-size: 20px;
     font-weight: 500;
-
-
 }
 
-.hero-dot-play {
+.heroDotPlay {
     margin-top: 120px;
     display: flex;
     justify-content: space-between;
 }
 
-.hero-dots {
+.heroDots {
     display: flex;
     align-items: center;
     gap: 23px;
     list-style: none;
 }
 
-.hero-dot {
+.heroDot {
     width: 15px;
     height: 15px;
     background: #FFFF;
@@ -58,7 +54,7 @@
     cursor: pointer;
 }
 
-.hero-dot-orange {
+.heroDotOrange {
     width: 15px;
     height: 15px;
     border-radius: 7.5px;
@@ -66,14 +62,14 @@
     background: rgb(255, 83, 21);
 }
 
-.hero-play {
+.heroPlay {
     display: flex;
     cursor: pointer;
     align-items: center;
     gap: 30px;
 }
 
-.hero-play p {
+.heroPlay p {
     color: #FFF;
     font-size: 19px;
 }
