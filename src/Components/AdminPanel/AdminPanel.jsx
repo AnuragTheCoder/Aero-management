@@ -6,13 +6,10 @@ import imgs from "../../Assets/marcel-strauss-NgfXZ7JYodE-unsplash.jpg";
 
 const AdminPanel = () => {
 
-    const [isFlag, setFlag] = useState("");
+    const [isFlag, setFlag] = useState("lol");
     const navigate = useNavigate();
     const { isAuthenticated, user } = useAuth();
-    console.log(user);
-    if (user.email !== "anurag" && user.password !== "anurag") {
-        navigate('/login')
-    }
+
     const [flaggedFlight, setFlaggedFlight] = useState("");
     const [flightData, setFlightData] = useState({
         from: '',
@@ -48,6 +45,10 @@ const AdminPanel = () => {
     ]);
 
     useEffect(() => {
+        console.log(user);
+        if (user.email !== "anurag" && user.password !== "anurag") {
+            navigate('/login')
+        }
         fetchFlights();
     }, []);
 
@@ -119,9 +120,10 @@ const AdminPanel = () => {
 
     const [add, setAdd] = useState(true);
 
-    const handleUpdate = async (flightId) => {
+    const handleUpdate = async (e, flaggedFlight) => {
+        e.preventDefault();
         try {
-            const response = await axios.put(`http://localhost:4000/flights/${flightId}`, flightData, {
+            const response = await axios.put(`http://localhost:4000/flights/${flaggedFlight}`, flightData, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -143,6 +145,7 @@ const AdminPanel = () => {
             console.error('Error updating flight:', error);
             alert('Failed to update flight');
         }
+        console.log(flaggedFlight);
     };
 
     const handleFlag = async (flightId) => {
@@ -156,7 +159,9 @@ const AdminPanel = () => {
             setCheckedAirlines(airlines);
             setArr(airlines);
             setAdd(false);
+            console.log(flightId);
             setFlaggedFlight(flightId);
+            console.log(flaggedFlight);
             setFlag(flightId);
         } catch (error) {
             console.error('Error updating flight:', error);
@@ -165,11 +170,11 @@ const AdminPanel = () => {
     };
     const handleSetFlag = () => {
         setFlightData({ from: '', to: '', arrivalTime: '', departureTime: '', airlines: [] });
-
+        // setFlaggedFlight("");
         setCheckedAirlines([]);
         setArr([]);
         setAdd(false);
-        setFlag("");
+        setFlag("lol");
     }
 
     const handleDelete = async (flightId) => {
@@ -193,6 +198,7 @@ const AdminPanel = () => {
             arrivalTime: '',
             airlines: []
         });
+
         setCheckedAirlines([]);
         setArr([]);
     };
@@ -321,11 +327,11 @@ const AdminPanel = () => {
                             </div>
 
                             <div>
-                                {flaggedFlight ?
+                                {isFlag !== "lol" ?
                                     <button
                                         type="submit"
                                         className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                                        onClick={(e) => handleUpdate(flaggedFlight)}
+                                        onClick={(e) => handleUpdate(e, flaggedFlight)}
                                     >
                                         Update Flight
                                     </button> :
@@ -336,14 +342,6 @@ const AdminPanel = () => {
                                     >
                                         Add Flight
                                     </button>}
-                                {flaggedFlight &&
-                                    <button
-                                        className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 mt-4"
-                                        onClick={handleOnFlaggedforUpdation}
-                                    >
-                                        Add a New Flight
-                                    </button>
-                                }
                             </div>
                         </form>
                     </div>
@@ -369,19 +367,19 @@ const AdminPanel = () => {
                                                 {flight.airlines.map((air) => (<div className='h-[90px] text-center bg-black text-white bg-opacity-85 shadow-gray-400 shadow-sm font-bold w-[120px] text-sm border-red-100 border-2 mb-10 rounded-md mx-4 p-4' key={air}>{air}</div>))}
                                             </div>
                                             <div className="flex gap-2 mt-10">
-                                                {isFlag !== flight._id && <button
+                                                {isFlag !== flight._id ? <button
                                                     className="w-full h-[40px] mt-9 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-yellow-500 hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                                                     onClick={() => handleFlag(flight._id)}
                                                 >
                                                     Update
                                                 </button>
-                                                }
-                                                {isFlag === flight._id && <button
-                                                    className="w-full h-[40px] mt-9 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-yellow-500 hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                                                    onClick={handleSetFlag}
-                                                >
-                                                    Flagged for updation
-                                                </button>
+
+                                                    : <button
+                                                        className="w-full h-[40px] mt-9 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-yellow-500 hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                                        onClick={handleSetFlag}
+                                                    >
+                                                        Flagged for updation
+                                                    </button>
                                                 }
                                                 <button
                                                     className="w-full h-[40px] mt-9 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-500 hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
