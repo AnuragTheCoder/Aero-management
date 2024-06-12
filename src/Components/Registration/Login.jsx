@@ -4,50 +4,49 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
-import { Link } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
+import { Link } from 'react-router-dom';
+import { useAuth } from '../Context/UserContext'
 import Cookies from 'js-cookie';
-const Registration = () => {
-
+const Login = () => {
+    const { login } = useAuth();
     const navigate = useNavigate();
-    const [check, setCheck] = useState(false);
-    const [name, setName] = useState("");
+    // const [check, setCheck] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
     const handleClick = async (e) => {
         e.preventDefault();
-        if (check) {
-            try {
-                const obj = await axios.post('http://127.0.0.1:4000/api/auth/register', {
-                    name,
-                    email,
-                    password
-                }, {
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                })
-                console.log(obj);
-                toast.success("Registered successfully");
-                Cookies.set("token", obj.data.token);
-                setTimeout(() => {
-                    if (obj.data.success) {
-                        navigate('/explore');
-                    }
 
-                }, 2000)
+        try {
+            const obj = await axios.post('http://127.0.0.1:4000/api/auth/login', {
+                email,
+                password
+            }, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }, {
+                withCredentials: true // This is crucial for sending cookies
+            })
+            Cookies.set("token", obj.data.token);
+            console.log(obj.data.user);
+            login(obj.data.user);
+            toast.success("Login successfully");
+            setTimeout(() => {
+                if (obj.data.success) {
+                    navigate('/explore');
+                }
 
-            }
-            catch (err) {
-
-                toast.error(err.response.data.message || 'Registration failed');
-            }
+            }, 2000)
 
         }
-        else {
-            alert("accept terms and conditions")
+        catch (err) {
+
+            toast.error(err.response.data.message || 'Registration failed');
         }
+
+
 
 
     }
@@ -61,12 +60,12 @@ const Registration = () => {
                 <div class="grid md:grid-cols-3 items-center shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-xl overflow-hidden">
                     <div class="max-md:order-1 flex flex-col justify-center space-y-16 max-md:mt-16 min-h-full bg-gradient-to-r from-gray-900 to-gray-700 lg:px-8 px-4 py-4">
                         <div>
-                            <h4 class="text-white text-lg font-semibold">Create Your Account</h4>
-                            <p class="text-[13px] text-white mt-2">Welcome to our registration page! Get started by creating your account.</p>
+                            <h4 class="text-white text-lg font-semibold">Login to Your Account</h4>
+                            <p class="text-[13px] text-white mt-2">Welcome to our Login page! Get started by Logging in to your account.</p>
                         </div>
                         <div>
-                            <h4 class="text-white text-lg font-semibold">Simple & Secure Registration</h4>
-                            <p class="text-[13px] text-white mt-2">Our registration process is designed to be straightforward and secure. We prioritize your privacy and data security.</p>
+                            <h4 class="text-white text-lg font-semibold">Simple & Secure Login</h4>
+                            <p class="text-[13px] text-white mt-2">Our Login process is designed to be straightforward and secure. We prioritize your privacy and data security.</p>
                         </div>
                     </div>
                     <form class="md:col-span-2 w-full py-6 px-6 sm:px-16">
@@ -75,14 +74,7 @@ const Registration = () => {
                         </div>
                         <div class="space-y-5">
                             <div>
-                                <label class="text-sm mb-2 block">Name</label>
-                                <div class="relative flex items-center">
-                                    <input value={name} onChange={(e) => setName(e.target.value)} name="name" type="text" required class="bg-white border border-gray-300 w-full text-sm px-4 py-2.5 rounded-md outline-blue-500" placeholder="Enter name" />
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#bbb" stroke="#bbb" class="w-4 h-4 absolute right-4" viewBox="0 0 24 24">
-                                        <circle cx="10" cy="7" r="6" data-original="#000000"></circle>
-                                        <path d="M14 15H6a5 5 0 0 0-5 5 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 5 5 0 0 0-5-5zm8-4h-2.59l.3-.29a1 1 0 0 0-1.42-1.42l-2 2a1 1 0 0 0 0 1.42l2 2a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42l-.3-.29H22a1 1 0 0 0 0-2z" data-original="#000000"></path>
-                                    </svg>
-                                </div>
+
                             </div>
                             <div>
                                 <label class="text-sm mb-2 block">Email Id</label>
@@ -110,19 +102,14 @@ const Registration = () => {
                                     </svg>
                                 </div>
                             </div>
-                            <div class="flex items-center">
-                                <input id="remember-me" name="remember-me" type="checkbox" checked={check} onChange={(e) => setCheck(e.target.checked)} class="h-4 w-4 shrink-0 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" />
-                                <label for="remember-me" class="ml-3 block text-sm">
-                                    I accept the <a href="javascript:void(0);" class="text-blue-600 font-semibold hover:underline ml-1">Terms and Conditions</a>
-                                </label>
-                            </div>
+
                         </div>
                         <div class="!mt-10">
                             <button type="button" onClick={handleClick} class="w-full py-3 px-4 text-sm font-semibold rounded text-white bg-gray-700 hover:bg-gray-800 focus:outline-none">
-                                Create an account
+                                Login
                             </button>
                         </div>
-                        <p class="text-sm mt-6 text-center">Already have an account? <Link to="/login" class="text-blue-600 font-semibold hover:underline ml-1">Login here</Link></p>
+                        <p class="text-sm mt-6 text-center">Dont have an account? <Link to="/register" class="text-blue-600 font-semibold hover:underline ml-1">Register Here</Link></p>
                     </form>
                 </div>
             </div>
@@ -132,4 +119,4 @@ const Registration = () => {
 
 
 
-export default Registration
+export default Login

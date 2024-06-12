@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const Flight = require('./models/Flight')
-const User = require('./models/User')
+// const User = require('./models/User')
 const cors = require('cors');
 const authRoutes = require("./routes/auth");
 const protectedRoutes = require("./routes/protectedRoute");
@@ -9,10 +9,14 @@ const cookieParser = require("cookie-parser");
 
 
 const path = require("path");
-app.use(cors()); app.use(cors({
+const dotenv = require("dotenv");
+dotenv.config();
+
+app.use(cors({
     origin: ['http://127.0.0.1:3003', 'http://localhost:3003'],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization']
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true // Allow credentials
 }));
 if (process.env.NODE_ENV !== "production") {
     require("dotenv").config();
@@ -43,7 +47,7 @@ app.post('/flights', async (req, res) => {
         res.status(200).json({
             success: true,
             message: 'Airline Created',
-            newFlightData
+            newFlight
         })
     }
     catch (err) {
@@ -113,5 +117,71 @@ app.get('/flights/:from/:to', async (req, res) => {
     }
 
 })
+
+
+app.get('/flights', async (req, res) => {
+    try {
+        const flights = await Flight.find();
+        res.status(200).json({
+            success: true,
+            flights
+        })
+
+
+
+    }
+    catch (err) {
+        res.status(500).json({
+            success: false,
+            message: err.message
+
+        })
+    }
+})
+app.get('/flights/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const flights = await Flight.findById(id);
+        res.status(200).json({
+            success: true,
+            flights
+        })
+
+
+
+    }
+    catch (err) {
+        res.status(500).json({
+            success: false,
+            message: err.message
+
+        })
+    }
+})
+
+
+
+app.put('/flights/:id', async (req, res) => {
+    const { id } = req.params;
+    const flightData = req.body;
+
+    try {
+        const updatedFlight = await Flight.findByIdAndUpdate(id, flightData, { new: true });
+        res.json(updatedFlight);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+});
+
+app.delete('/flights/:id', async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        await Flight.findByIdAndDelete(id);
+        res.json({ message: 'Flight deleted successfully' });
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+});
 
 module.exports = app;

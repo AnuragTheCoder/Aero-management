@@ -74,3 +74,22 @@ exports.loginUser = async (req, res) => {
     }
 };
 
+exports.verifyToken = async (req, res) => {
+    const { token } = req.body;
+
+    if (!token) {
+        return res.status(401).json({ success: false, error: "Not authorized to access this resource" });
+    }
+
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const user = await User.findById(decoded._id);
+        req.user = user;
+        res.status(200).json({
+            success: true,
+            user
+        })
+    } catch (error) {
+        return res.status(401).json({ success: false, message: "Not authorized to access this resource" });
+    }
+};
