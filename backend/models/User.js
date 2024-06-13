@@ -27,6 +27,17 @@ const userSchema = new mongoose.Schema({
 
     },
 
+    bookedFlights: [
+        {
+            to: String,
+            from: String,
+            arrivalTime: String,
+            departureTime: String,
+            airline: String
+
+        }
+    ],
+
 
 
     resetPasswordToken: String,

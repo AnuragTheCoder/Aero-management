@@ -6,6 +6,8 @@ const cors = require('cors');
 const authRoutes = require("./routes/auth");
 const protectedRoutes = require("./routes/protectedRoute");
 const cookieParser = require("cookie-parser");
+const City = require("./models/Citites");
+const User = require("./models/User")
 
 
 const path = require("path");
@@ -32,6 +34,219 @@ app.use(cookieParser());
 
 app.use("/api/auth", authRoutes);
 app.use("/api", protectedRoutes);
+
+
+
+
+
+
+
+// Helper function to convert 12-hour time format to minutes
+
+
+// Helper function to convert 12-hour time format to minutes
+const convertToMinutes = (time) => {
+    const match = time.match(/^(\d{1,2}):?(\d{2})?(am|pm)$/i);
+    if (!match) return null;
+
+    let [, hourStr, minuteStr, period] = match;
+    let hour = parseInt(hourStr);
+    let minutes = minuteStr ? parseInt(minuteStr) : 0;
+
+    if (hour === 12) {
+        // Handle special case for 12am and 12pm
+        hour = period.toLowerCase() === 'am' ? 0 : 12;
+    } else {
+        // Adjust hour for pm period
+        if (period.toLowerCase() === 'pm') {
+            hour += 12;
+        }
+    }
+
+    return hour * 60 + minutes;
+};
+
+
+
+
+app.get('/cities', async (req, res) => {
+    try {
+        const cities = await City.find();
+        if (!cities) {
+            return res.status(500).json({
+                success: false,
+                message: "not any cities"
+            })
+        }
+        res.status(200).json({
+            cities
+        })
+    }
+    catch (err) {
+        res.status(400).json({
+            success: false,
+            message: err.message
+        })
+    }
+})
+
+app.post('/cities', async (req, res) => {
+    try {
+        const { cities } = req.body;
+        const inserted = await City.insertMany(cities)
+        res.status(200).json({
+            success: true, message: `${inserted.length} cities created successfully`,
+        })
+    }
+    catch (err) {
+        res.status(400).json({
+            success: false,
+            message: err.message
+        })
+    }
+})
+
+
+// Define the /flights/search route
+app.get('/flights/search', async (req, res) => {
+    try {
+        const { from, to, time } = req.query;
+
+        // Check for missing parameters
+        if (!from || !to || !time) {
+            return res.status(400).json({ error: 'Missing required query parameters' });
+        }
+        if (time === "any" || !time) {
+            const flights = await Flight.find({ from, to });
+            if (!flights) {
+                console.error('No flights found for the given criteria');
+                return res.status(200).json({ flights: [] });
+            }
+            return res.status(200).json({ flights });
+        }
+        else {
+
+            // Convert the query time to minutes
+            const queryTimeMinutes = convertToMinutes(time);
+            if (queryTimeMinutes === null) {
+                return res.status(400).json({ error: 'Invalid time format' });
+            }
+
+            // Calculate the time range (±4 hours)
+            const lowerBound = queryTimeMinutes - 4 * 60;
+            const upperBound = queryTimeMinutes + 4 * 60;
+
+            // Fetch flights based on 'from' and 'to'
+            const flights = await Flight.find({ from, to });
+            if (!flights) {
+                console.error('No flights found for the given criteria');
+                return res.status(200).json({ flights: [] });
+            }
+
+            // Filter flights based on the departure time range
+            const filteredFlights = flights.filter(flight => {
+                const flightTimeMinutes = convertToMinutes(flight.departureTime);
+                return (flightTimeMinutes >= lowerBound && flightTimeMinutes <= upperBound);
+            });
+
+            res.status(200).json({ flights: filteredFlights });
+        }
+    } catch (error) {
+        console.error('Error searching flights:', error);
+        res.status(500).json({ error: 'An error occurred while searching for flights' });
+    }
+});
+
+
+
+app.put('/updateFlights/:id', async (req, res) => {
+    try {
+        const { id } = req.params; // User ID
+        const { to, from, arrivalTime, departureTime, airline } = req.body; // Flight details
+
+        // Find the user by ID
+        const user = await User.findById(id);
+        if (!user) {
+            return res.status(404).json({ success: false, message: 'User not found' });
+        }
+
+        // Add the flight details to the user's bookedFlights array
+        user.bookedFlights.push({ to, from, arrivalTime, departureTime, airline });
+        await user.save();
+
+        res.status(200).json({
+            success: true,
+            message: 'Flight booked successfully',
+            bookedFlights: user.bookedFlights,
+        });
+    } catch (error) {
+        res.status(400).json({
+            success: false,
+            message: error.message,
+        });
+    }
+})
+
+app.put('/updateManyFlights/:id', async (req, res) => {
+    try {
+        const { id } = req.params; // User ID
+        const flights = req.body.flights; // Array of flight details
+
+        if (!Array.isArray(flights) || flights.length === 0) {
+            return res.status(400).json({ success: false, message: 'Invalid flights data' });
+        }
+
+        // Find the user by ID
+        const user = await User.findById(id);
+        if (!user) {
+            return res.status(404).json({ success: false, message: 'User not found' });
+        }
+
+        // Append new flights directly to bookedFlights array
+        user.bookedFlights = [...flights];
+        await user.save();
+
+        res.status(200).json({
+            success: true,
+            message: 'Flights booked successfully',
+            bookedFlights: user.bookedFlights,
+        });
+    } catch (error) {
+        res.status(400).json({
+            success: false,
+            message: error.message,
+        });
+    }
+});
+
+
+
+app.get('/getManyFlights/:id', async (req, res) => {
+    try {
+        const { id } = req.params; // User ID
+
+        // Find the user by ID
+        const user = await User.findById(id);
+        if (!user) {
+            return res.status(404).json({ success: false, message: 'User not found' });
+        }
+
+
+
+        res.status(200).json({
+            success: true,
+            message: 'Flights fetched successfully',
+            bookedFlights: user.bookedFlights,
+        });
+    } catch (error) {
+        res.status(400).json({
+            success: false,
+            message: error.message,
+        });
+    }
+});
+
+
 
 app.post('/flights', async (req, res) => {
     try {
@@ -183,5 +398,10 @@ app.delete('/flights/:id', async (req, res) => {
         res.status(400).json({ message: error.message });
     }
 });
+
+
+
+
+
 
 module.exports = app;
