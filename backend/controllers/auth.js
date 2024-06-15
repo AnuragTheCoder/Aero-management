@@ -50,6 +50,34 @@ exports.registerUser = async (req, res) => {
     }
 };
 
+
+exports.UpdateMyFlights = async (req, res) => {
+    try {
+        const { id } = req.params; // User ID
+        const { to, from, arrivalTime, departureTime, airline } = req.body; // Flight details
+
+        // Find the user by ID
+        const user = await User.findById(id);
+        if (!user) {
+            return res.status(404).json({ success: false, message: 'User not found' });
+        }
+
+        // Add the flight details to the user's bookedFlights array
+        user.bookedFlights.push({ to, from, arrivalTime, departureTime, airline });
+        await user.save();
+
+        res.status(200).json({
+            success: true,
+            message: 'Flight booked successfully',
+            bookedFlights: user.bookedFlights,
+        });
+    } catch (error) {
+        res.status(400).json({
+            success: false,
+            message: error.message,
+        });
+    }
+}
 // Login User
 exports.loginUser = async (req, res) => {
     const { email, password } = req.body;
@@ -73,6 +101,9 @@ exports.loginUser = async (req, res) => {
         });
     }
 };
+
+
+
 
 exports.verifyToken = async (req, res) => {
     const { token } = req.body;

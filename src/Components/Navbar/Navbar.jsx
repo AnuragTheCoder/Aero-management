@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styles from './Navbar.module.css'; // Corrected import statement
-
+import { useAuth } from '../Context/UserContext';
 const Navbar = () => {
+    const { user } = useAuth();
     const location = useLocation();
     const [activeLink, setActiveLink] = React.useState(location.pathname);
 
@@ -50,6 +51,17 @@ const Navbar = () => {
                         Contact us
                     </Link>
                 </li>
+                {
+                    user != null && <li>
+                        <Link
+                            to="/myflights"
+                            className={activeLink === '/myflights' ? styles.active : ''}
+                            onClick={() => handleLinkClick('/myflights')}
+                        >
+                            {user.name} Flights
+                        </Link>
+                    </li>
+                }
             </ul>
         </div>
     );

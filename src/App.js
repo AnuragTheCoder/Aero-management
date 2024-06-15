@@ -11,8 +11,17 @@ import ProtectedRoute from './Components/ProtectedRoute';
 import { AuthProvider } from './Components/Context/UserContext';
 import Login from './Components/Registration/Login';
 import AdminPanel from './Components/AdminPanel/AdminPanel';
+import MyFlights from './Components/MyFlights';
+import { useState } from 'react';
+
+
+
+
 
 const App = () => {
+
+  const [myFlights, setMyFlights] = useState([]);
+
   return (
     <AuthProvider>
       <Router>
@@ -26,7 +35,8 @@ const App = () => {
             <Route path="/login" element={<Login />} />
             <Route element={<ProtectedRoute />}>
               <Route path="/adminpanel" element={<AdminPanel />} />
-              <Route path="/explore" element={<Explore />} />
+              <Route path="/explore" element={<Explore myFlights={myFlights} setMyFlights={setMyFlights} />} />
+              <Route path="/myflights" element={<MyFlights myFlights={myFlights} setMyFlights={setMyFlights} />} />
             </Route>
           </Route>
         </Routes>

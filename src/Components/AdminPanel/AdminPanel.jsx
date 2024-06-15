@@ -140,6 +140,7 @@ const AdminPanel = () => {
             });
             setArr([]); // Clear the selected airlines array
             setCheckedAirlines([]); // Clear checked airlines state
+            setFlag("lol")
             alert('Flight updated successfully!');
         } catch (error) {
             console.error('Error updating flight:', error);
@@ -367,7 +368,7 @@ const AdminPanel = () => {
                                                 {flight.airlines.map((air) => (<div className='h-[90px] text-center bg-black text-white bg-opacity-85 shadow-gray-400 shadow-sm font-bold w-[120px] text-sm border-red-100 border-2 mb-10 rounded-md mx-4 p-4' key={air}>{air}</div>))}
                                             </div>
                                             <div className="flex gap-2 mt-10">
-                                                {isFlag !== flight._id ? <button
+                                                {isFlag === "lol" ? <button
                                                     className="w-full h-[40px] mt-9 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-yellow-500 hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                                                     onClick={() => handleFlag(flight._id)}
                                                 >

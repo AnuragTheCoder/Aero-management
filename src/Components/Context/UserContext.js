@@ -3,6 +3,7 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 const UserContext = createContext();
 
 
@@ -50,6 +51,7 @@ export const AuthProvider = ({ children }) => {
         Cookies.remove('token');
         setIsAuthenticated(false);
         setUser(null);
+        // Navigate('/login')
     };
 
     return (
