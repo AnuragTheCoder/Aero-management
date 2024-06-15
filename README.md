@@ -1,70 +1,130 @@
-# Getting Started with Create React App
+# Airline Management System
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Welcome to the Airline Management System project! This repository hosts a full-stack web application that allows users to manage their airline travel efficiently. By using this application, users can search for flights, book tickets, and cancel reservations, all with a secure authentication system.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **User Authentication**: Secure registration and login system.
+- **Flight Search**: Search for available flights based on departure and arrival cities, and preferred departure time.
+- **Flight Booking**: Book flights and receive booking confirmations.
+- **Booking Cancellation**: Cancel bookings easily and get notified of the changes.
+- **Interactive UI**: User-friendly interface for a seamless experience.
 
-### `npm start`
+## Getting Started
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Prerequisites
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Python 3.7+
+- Node.js
+- React
+- Express
+- MongoDB
 
-### `npm test`
+### Installation
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/AnuragTheCoder/Aero-management.git
+    cd Aero-management
+    ```
 
-### `npm run build`
+2. Set up the backend:
+    - Navigate to the `backend` directory:
+      ```bash
+      cd backend
+      ```
+    - Install the required packages:
+      ```bash
+      npm install
+      ```
+    - Start the server:
+      ```bash
+      nodemon server.js
+      ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+3. Set up the frontend:
+    - Navigate to the `airline` directory:
+      ```bash
+      cd ../airline
+      ```
+    - Install the required packages:
+      ```bash
+      npm install
+      ```
+    - Start the frontend server:
+      ```bash
+      npm start
+      ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+4. Update CORS settings:
+    - Ensure your React app URL is correctly set in the CORS settings of `app.js`. If you are running on `localhost` ports `3000`, `3001`, `3002`, or `3003`, you should not encounter any issues.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Usage
 
-### `npm run eject`
+1. Open your web browser and navigate to the React frontend URL, typically `http://localhost:3000`.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+2. Register a new user account or log in with existing credentials.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+3. Search for flights by entering the departure and arrival cities, and the desired departure time.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+4. Book a flight from the search results.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+5. Manage your bookings by viewing booked flights and canceling if necessary.
 
-## Learn More
+## Project Structure
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- `backend/`: Contains the Express server and Mongoose models for managing the backend functionality.
+- `airline/`: Contains the React frontend application for user interactions.
+- `app.js`: Main backend application script with CORS settings.
+- `server.js`: Script to start the backend server.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Contributing
 
-### Code Splitting
+We welcome contributions! If you'd like to contribute, please follow these steps:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature-branch`).
+3. Make your changes and commit them (`git commit -m 'Add new feature'`).
+4. Push to the branch (`git push origin feature-branch`).
+5. Create a pull request.
 
-### Analyzing the Bundle Size
+## License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-### Making a Progressive Web App
+## Acknowledgments
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- Thanks to the open-source community for the tools and libraries used in this project.
 
-### Advanced Configuration
+## Contact
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+If you have any questions, feel free to reach out:
 
-### Deployment
+- GitHub: [AnuragTheCoder](https://github.com/AnuragTheCoder)
+- Email: youremail@example.com
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Enjoy managing your airline travels! ✈️
 
-### `npm run build` fails to minify
+### Screenshots
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+#### Home Page
+![Home Page](screenshots/1.png)
+
+#### Search Flights
+![Search Flights](screenshots/2.png)
+
+#### Book Flight
+![Book Flight](screenshots/3.png)
+
+#### Manage Bookings
+![Manage Bookings](screenshots/4.png)
+
+#### Admin To Add Flights
+![Manage Bookings](screenshots/5.png)
+
+#### Update Added Flights
+![Manage Bookings](screenshots/6.png)
+
+
+## Live Demo
+
