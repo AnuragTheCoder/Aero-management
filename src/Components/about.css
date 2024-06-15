@@ -1,17 +1,3 @@
-._About::before {
-  top: 0;
-  content: "";
-  /* background-color: rgba(78, 128, 63, 0.875); */
-  background: url("../Assets/aboutPageBg.png");
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  z-index: -1;
-  opacity: 0.7;
-}
-._About {
-  /* border: 2px solid blue; */
-}
 .links {
   width: 100%;
   /* border: 2px solid blue; */
@@ -22,7 +8,8 @@
   align-items: center;
   padding: 10px;
 }
-.links > div {
+
+.links>div {
   padding: 20px;
   /* border: 2px solid green; */
   height: 100%;
@@ -31,7 +18,8 @@
   justify-content: space-between;
   align-items: center;
 }
-.links > div > a {
+
+.links>div>a {
   width: 5rem;
   height: 5rem;
   /* border: 2px solid rgb(87, 179, 159); */
@@ -42,16 +30,20 @@
   border-radius: 20px;
   margin: 2rem;
 }
-.links > div :nth-child(1) {
+
+.links>div :nth-child(1) {
   background: url("../Assets/twittericon.jpeg") no-repeat center center/cover;
 }
-.links > div :nth-child(2) {
+
+.links>div :nth-child(2) {
   background: url("../Assets/instagramicon.jpeg") no-repeat center center/cover;
 }
-.links > div :nth-child(3) {
+
+.links>div :nth-child(3) {
   background: url("../Assets/facebookicon.jpeg") no-repeat center center/cover;
 }
-.links > div :nth-child(4) {
+
+.links>div :nth-child(4) {
   background: url("../Assets/youtubeicon.jpeg") no-repeat center center/cover;
 }
 
@@ -61,7 +53,8 @@
   padding: 10px;
   margin: 20px;
 }
-.About > h2 {
+
+.About>h2 {
   text-shadow: 0 0 3px rgb(9, 23, 21);
   color: rgb(127, 216, 220);
   /* border: 2px solid green; */
@@ -70,7 +63,7 @@
   padding: 10px;
 }
 
-.About > div {
+.About>div {
   background-color: rgba(255, 255, 255, 0.687);
   margin: 1rem;
   border-radius: 15px;
@@ -81,7 +74,8 @@
   width: 60vw;
   /* border: 1px solid orange; */
 }
-.About > div > h3 {
+
+.About>div>h3 {
   color: rgb(16, 27, 27);
   font-weight: 500;
   padding: 5px;
@@ -90,7 +84,9 @@
 
   /* border: 0.5px solid black; */
 }
-.About > div > p {
+
+.sr,
+.About>div>p {
   color: rgb(13, 37, 84);
   text-shadow: 0 0 5px white;
   margin-left: 1rem;

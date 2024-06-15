@@ -43,7 +43,7 @@ const Login = () => {
         }
         catch (err) {
 
-            toast.error(err.response.data.message || 'Registration failed');
+            toast.error('Registration failed');
         }
 
 

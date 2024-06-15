@@ -14,6 +14,11 @@ const Explore = ({ myFlights, setMyFlights }) => {
     const [suggestions, setSuggestions] = useState([]);
     const [flights, setFlights] = useState([]);
     const { user, logout } = useAuth();
+
+
+
+
+
     useEffect(() => {
         // Fetch cities data from an API or use a predefined list
         const fetchCities = async () => {
@@ -71,6 +76,7 @@ const Explore = ({ myFlights, setMyFlights }) => {
 
     }
 
+
     const [flag, setFlag] = useState("flag");
 
     const handleBooking = (e, id, airline, to, from, arrivalTime, departureTime) => {
@@ -106,9 +112,13 @@ const Explore = ({ myFlights, setMyFlights }) => {
 
     }
 
+
+
     return (
         <>
+
             <img src={imagexe} className='h-full w-full  top-0 left-0 right-0 bottom-0 p-0 fixed object-cover z-[-2] opacity-90 ' alt="" />
+
             <div className='min-h-screen  bg-gray-100  '>
                 <div className='right-0  text-white p-5 w-[14%]  absolute border-2  bg-slate-700 shadow-lg rounded-lg'>
                     <div className='flex items-center mb-3'>
@@ -260,6 +270,7 @@ const Explore = ({ myFlights, setMyFlights }) => {
                     </div>
                 </div>
             </div >
+
 
         </>
     )

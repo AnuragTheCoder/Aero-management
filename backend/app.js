@@ -14,6 +14,18 @@ const path = require("path");
 const dotenv = require("dotenv");
 dotenv.config();
 
+
+
+
+
+
+
+
+
+
+
+
+
 app.use(cors({
     origin: ['http://127.0.0.1:3003', 'http://localhost:3003'],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
@@ -34,6 +46,13 @@ app.use(cookieParser());
 
 app.use("/api/auth", authRoutes);
 app.use("/api", protectedRoutes);
+
+
+
+
+
+
+
 
 
 
@@ -218,6 +237,42 @@ app.put('/updateManyFlights/:id', async (req, res) => {
         });
     }
 });
+
+
+app.delete('/deleteManyFlights/:id', async (req, res) => {
+    try {
+        const { id } = req.params; // User ID
+        const flightIds = req.body.flightIds; // Array of flight IDs to delete
+
+        if (!Array.isArray(flightIds) || flightIds.length === 0) {
+            return res.status(400).json({ success: false, message: 'Invalid flight IDs data' });
+        }
+
+        // Find the user by ID
+        const user = await User.findById(id);
+        if (!user) {
+            return res.status(404).json({ success: false, message: 'User not found' });
+        }
+
+        // Filter out the flights to be deleted
+        user.bookedFlights = user.bookedFlights.filter(flight => !flightIds.includes(flight.toString()));
+
+        await user.save();
+
+        res.status(200).json({
+            success: true,
+            message: 'Flights deleted successfully',
+            bookedFlights: user.bookedFlights,
+        });
+    } catch (error) {
+        res.status(400).json({
+            success: false,
+            message: error.message,
+        });
+    }
+});
+
+
 
 
 

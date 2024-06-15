@@ -2,14 +2,24 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styles from './Navbar.module.css'; // Corrected import statement
 import { useAuth } from '../Context/UserContext';
+import { useNavigate } from 'react-router-dom';
+
 const Navbar = () => {
-    const { user } = useAuth();
+    const { user, logout } = useAuth();
     const location = useLocation();
     const [activeLink, setActiveLink] = React.useState(location.pathname);
+    const navigate = useNavigate();
 
     const handleLinkClick = (path) => {
         setActiveLink(path);
     };
+
+    const handleLogout = () => {
+        logout();
+        navigate('/login');
+
+    }
+
 
     return (
         <div className={styles.nav}> {/* Apply styles.nav here */}
@@ -30,7 +40,8 @@ const Navbar = () => {
                         className={activeLink === '/explore' ? styles.active : ''}
                         onClick={() => handleLinkClick('/explore')}
                     >
-                        Explore
+                        {user === null && <span className='text-sm'>Register/Login To Explore</span>}
+                        {user !== null && <span>Explore</span>}
                     </Link>
                 </li>
                 <li>
@@ -52,15 +63,37 @@ const Navbar = () => {
                     </Link>
                 </li>
                 {
-                    user != null && <li>
+                    user != null &&
+
+                    <p className='w-[60px] flex flex-col items-center gap-2'>
                         <Link
                             to="/myflights"
-                            className={activeLink === '/myflights' ? styles.active : ''}
+                            className="bg-blue-600 p-4 rounded-lg hover:bg-blue-800"
                             onClick={() => handleLinkClick('/myflights')}
                         >
-                            {user.name} Flights
+                            <span>{user.name}&nbsp;Flights</span>
                         </Link>
-                    </li>
+
+                        <button className='bg-red-400 rounded-lg p-4  text-white hover:bg-red-700' onClick={handleLogout}>
+                            Logout
+                        </button>
+                    </p>
+
+                }
+                {
+                    user === null && <p className='w-[60px] flex flex-col items-center gap-2'>
+                        <Link
+                            to="/register"
+                            className="bg-blue-600 p-4 hover:bg-blue-800 rounded-lg"
+                            onClick={() => handleLinkClick('/myflights')}
+                        >
+                            <span>Register</span>
+                        </Link>
+
+                        <Link to='/login' className='bg-green-400 rounded-lg hover:bg-red-700 p-4 text-white' >
+                            Login
+                        </Link>
+                    </p>
                 }
             </ul>
         </div>

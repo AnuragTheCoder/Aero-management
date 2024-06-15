@@ -15,7 +15,7 @@ const Hero = ({ heroData, setHeroCount, heroCount, setPlayStatus, playStatus }) 
             <div className={styles.merge}>
                 <Link to="/register">
                     <div className={styles.heroExplore}>
-                        <p>Register To Proceed</p>
+                        <p>Register To Explore</p>
                         <img src={arrowBtn} alt="Arrow Button" />
                     </div>
                 </Link>

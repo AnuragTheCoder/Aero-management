@@ -63,7 +63,7 @@ const MyFlights = ({ myFlights, setMyFlights }) => {
                 getMyFlights();
             }
         }
-    }, [delayed, user, myFlights]);
+    }, [delayed, user]);
 
     const handleRemoveFlight = (index) => {
         const updatedFlights = myFlights.filter((_, i) => i !== index);
@@ -72,7 +72,7 @@ const MyFlights = ({ myFlights, setMyFlights }) => {
         const refinedFlights = updatedFlights.map(({ id, ...rest }) => rest);
         const updateFlights = async () => {
             try {
-                const response = await axios.put(`http://localhost:4000/updateManyFlights/${user._id}`, {
+                const response = await axios.delete(`http://localhost:4000/deleteManyFlights/${user._id}`, {
                     flights: refinedFlights
                 }, {
                     headers: {
