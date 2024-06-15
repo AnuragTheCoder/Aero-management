@@ -53,7 +53,6 @@ const Login = () => {
 
 
 
-
     return (
         <>
 
@@ -73,7 +72,7 @@ const Login = () => {
                     </div>
                     <form class="md:col-span-2 w-full py-6 px-6 sm:px-16">
                         <div class="mb-6">
-                            <h3 class="text-2xl font-bold">Create an account</h3>
+                            <h3 class="text-2xl font-bold">Login to Your Account</h3>
                         </div>
                         <div class="space-y-5">
                             <div>

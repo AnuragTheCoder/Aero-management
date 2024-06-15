@@ -65,10 +65,10 @@ const Navbar = () => {
                 {
                     user != null &&
 
-                    <p className='w-[60px] flex flex-col items-center gap-2'>
+                    <p className='w-[60px] flex flex-col  mx-6 items-center gap-2'>
                         <Link
                             to="/myflights"
-                            className="bg-blue-600 p-4 rounded-lg hover:bg-blue-800"
+                            className="bg-blue-600 p-4 text-sm text-gray-100  max-w-[300px] truncate text-center rounded-lg hover:bg-blue-800"
                             onClick={() => handleLinkClick('/myflights')}
                         >
                             <span>{user.name}&nbsp;Flights</span>
@@ -81,7 +81,7 @@ const Navbar = () => {
 
                 }
                 {
-                    user === null && <p className='w-[60px] flex flex-col items-center gap-2'>
+                    user === null && <p className='w-[60px] mx-7 flex flex-col items-center gap-2'>
                         <Link
                             to="/register"
                             className="bg-blue-600 p-4 hover:bg-blue-800 rounded-lg"

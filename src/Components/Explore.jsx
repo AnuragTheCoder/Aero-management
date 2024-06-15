@@ -36,9 +36,15 @@ const Explore = ({ myFlights, setMyFlights }) => {
         };
 
         console.log(user);
-
         fetchCities();
+
+        // window.location.reload();
+
+
     }, []);
+
+
+
 
     const [st, setSt] = useState("");
 
@@ -49,6 +55,8 @@ const Explore = ({ myFlights, setMyFlights }) => {
         setCity(value);
         setSuggestions(cities.filter(city => city.toString().toLowerCase().includes(value.toString().toLowerCase())));
     };
+
+
 
 
 
@@ -135,7 +143,9 @@ const Explore = ({ myFlights, setMyFlights }) => {
                                 </g>
                             </svg>
 
-                            <p className='text-lg font-semibold text-gray-100'>{user.name}</p>
+                            <div className='w-1/2 h-[30px]'>
+                                <p className='text-sm text-gray-100  max-w-[300px] truncate text-center'>{user.name}</p>
+                            </div>
                             <div className='w-1/2 h-[30px]'>
                                 <p className='text-sm text-gray-100  max-w-[200px] truncate text-center'>{user.email}</p>
                             </div>
