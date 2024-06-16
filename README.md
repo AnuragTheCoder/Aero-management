@@ -136,6 +136,11 @@ Enjoy managing your airline travels! ✈️
 ![Flag flihts for updation ](screenshots/Screenshot%20(135).png)
 ![Flag flihts for updation ](screenshots/Screenshot%20(136).png)
 
+#### About Page
+![About us](screenshots/Screenshot%20(127).png)
+
+#### Contact us Page
+![Contact Us](screenshots/Screenshot%20(128).png)
 
 
 ## Live Demo
