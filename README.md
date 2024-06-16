@@ -114,7 +114,7 @@ Enjoy managing your airline travels! ✈️
 ### Screenshots
 
 #### Home Page
-![Home Page](Screenshot (119).png)
+![Home Page](Screenshot%20(119).png)
 
 #### Search Flights
 ![Search Flights](screenshots/2.png)
