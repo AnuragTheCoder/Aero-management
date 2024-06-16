@@ -116,20 +116,26 @@ Enjoy managing your airline travels! ✈️
 #### Home Page
 ![Home Page](screenshots/Screenshot%20(119).png)
 
-#### Search Flights
-![Search Flights](screenshots/2.png)
+#### Register
+![Home Page](screenshots/Screenshot%20(120).png)
+
+#### Search Flights/Explore Flights
+![Search Flights](screenshots/Screenshot%20(121).png)
 
 #### Book Flight
-![Book Flight](screenshots/3.png)
+![Book Flight](screenshots/Screenshot%20(122).png)
 
 #### Manage Bookings
-![Manage Bookings](screenshots/4.png)
+![Manage Bookings](screenshots/Screenshot%20(125).png)
 
-#### Admin To Add Flights
-![Manage Bookings](screenshots/5.png)
+#### Admin To Add Flights(login with email=anurag password=anurag and route to localhost:YOUR_PORT/adminpanel)
+![Add Flights](screenshots/Screenshot%20(132).png)
 
 #### Update Added Flights
-![Manage Bookings](screenshots/6.png)
+![Update Flihts](screenshots/Screenshot%20(134).png)
+![Flag flihts for updation ](screenshots/Screenshot%20(135).png)
+![Flag flihts for updation ](screenshots/Screenshot%20(136).png)
+
 
 
 ## Live Demo
