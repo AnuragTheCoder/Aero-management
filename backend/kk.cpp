@@ -1,62 +1,56 @@
-#include <iostream>
-#include <queue>
-#include <map>
 #include <bits/stdc++.h>
 using namespace std;
-
-int f(int ind, int display, int n)
+int f(int i, int j, bool isTrue, string exp)
 {
-
-    if (n == 0)
+    if (i > j)
     {
         return 0;
     }
-    int notTake = f(ind + 1, display, n);
-    int take = 1e9;
-    if (ind < 10)
+    if (i == j)
     {
-        if (n >= display * 10 + ind)
+        if (isTrue)
         {
-            int num = display * 10 + ind;
-
-            take = 1 + f(ind + 1, num, n - num);
-        }
-    }
-    if (ind == 10)
-    {
-        if (n > display * 100)
-        {
-            int num = display * 100;
-
-            take = 1 + f(ind + 1, num, n - num);
-        }
-    }
-    return min(take, notTake);
-}
-
-int main()
-{
-    // cout << f(10, 0, 60004) << "hhjb" << endl;
-    string s;
-    cin >> s;
-    int len = s.length();
-
-    int cnt = 0;
-    long long int num = 0;
-    for (int i = 0; i < s.length(); i++)
-    {
-        if (i + 1 < len && s[i] == '0' && s[i + 1] == '0')
-        {
-            i++;
-            // num = num * 100;
-            cnt++;
+            return exp[i] == true;
         }
         else
         {
-            int digit = s[i] - '0';
-            // num = num * 10 + digit;
-            cnt++;
+            return exp[i] == false;
         }
     }
-    cout << cnt << endl;
+    int ways = 0;
+    for (int ind = i + 1; ind <= j - 1; ind += 2)
+    {
+        int LT = f(i, ind - 1, 1, exp);
+        int LF = f(i, ind - 1, 0, exp);
+        int RT = f(ind + 1, j, 1, exp);
+        int RF = f(ind + 1, j, 0, exp);
+
+        if (exp[ind] == '&')
+        {
+            ways += LT * RT;
+        }
+        if (exp[ind] == '|')
+        {
+            ways += LT * RT + LF * RT + LT * RF;
+        }
+        if (exp[ind] == '^')
+        {
+            ways += LT * RF + RT * LF;
+        }
+    }
+    return ways;
+}
+
+int evaluateExp(string &exp)
+{
+    int n = exp.length();
+    return f(0, n - 1, 1, exp);
+}
+int main()
+{
+    string str;
+    cin >> str;
+    int ans = 0;
+    ans = evaluateExp(str);
+    cout << ans << endl;
 }

@@ -7,7 +7,9 @@ const Test = () => {
     useEffect(() => {
         const getWeather = async () => {
             try {
-                const apiUrl = `https://cors-anywhere.herokuapp.com/http://dataservice.accuweather.com/forecasts/v1/daily/1day/204842?apikey=${apiKey}&details=true`;
+                const url = 'https://cors-anywhere.herokuapp.com/'
+
+                const apiUrl = `http://dataservice.accuweather.com/forecasts/v1/daily/1day/204842?apikey=${apiKey}&details=true`;
 
                 const { data } = await axios.get(apiUrl);
 
