@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div>
+        <button id="btn" class="op">Enter</button>
+    </div>
+    <script>
+        let btn = document.getElementById("btn");
+
+
+        const getWeather = async () => {
+            try {
+                const apiUrl =
+                    `https://cors-anywhere.herokuapp.com/http://dataservice.accuweather.com/forecasts/v1/daily/1day/204842?apikey=${apiKey}&details=true`;
+
+                const { data } = await axios.get(apiUrl);
+
+                setResult(data);
+                console.log(data);
+            } catch (err) {
+                console.error(err);
+            }
+        };
+
+        btn.addEventListener("click", getWeather)
+
+
+    </script>
+</body>
+
+</html>
+
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+
+const Test = () => {
+const [result, setResult] = useState([]);
+const apiKey = 'Wrx9pqjDsfyrUvJF6qbieIkgMMAF7eiq';
