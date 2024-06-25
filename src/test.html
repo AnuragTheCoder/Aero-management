@@ -4,43 +4,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Weather App</title>
 </head>
 
 <body>
-
     <div>
-        <button id="btn" class="op">Enter</button>
+        <button id="btn">Get Weather</button>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
-        let btn = document.getElementById("btn");
-        const apiKey = "Wrx9pqjDsfyrUvJF6qbieIkgMMAF7eiq"
+        const btn = document.getElementById("btn");
+        const apiKey = "Wrx9pqjDsfyrUvJF6qbieIkgMMAF7eiq";
 
         const getWeather = async () => {
             try {
-                const apiUrl =
-                    `https://cors-anywhere.herokuapp.com/http://dataservice.accuweather.com/forecasts/v1/daily/1day/204842?apikey=Wrx9pqjDsfyrUvJF6qbieIkgMMAF7eiq&details=true`;
-
+                const apiUrl = `https://cors-anywhere.herokuapp.com/http://dataservice.accuweather.com/forecasts/v1/daily/1day/204842?apikey=${apiKey}&details=true`;
                 const { data } = await axios.get(apiUrl);
-
-                setResult(data);
                 console.log(data);
+                // Handle data as needed
             } catch (err) {
                 console.error(err);
             }
         };
 
-        btn.addEventListener("click", getWeather)
-
-
+        btn.addEventListener("click", getWeather);
     </script>
 </body>
 
 </html>
-
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-
-const Test = () => {
-const [result, setResult] = useState([]);
-const apiKey = 'Wrx9pqjDsfyrUvJF6qbieIkgMMAF7eiq';
