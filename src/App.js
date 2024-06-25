@@ -14,7 +14,7 @@ import AdminPanel from './Components/AdminPanel/AdminPanel';
 import MyFlights from './Components/MyFlights';
 import { useState } from 'react';
 
-
+import Test from './Components/Test';
 
 
 
@@ -33,6 +33,7 @@ const App = () => {
             <Route path="/contact" element={<Contact />} />
             <Route path="/register" element={<Registration />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/test" element={<Test />} />
             <Route element={<ProtectedRoute />}>
               <Route path="/adminpanel" element={<AdminPanel />} />
               <Route path="/explore" element={<Explore myFlights={myFlights} setMyFlights={setMyFlights} />} />
