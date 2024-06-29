@@ -19,7 +19,7 @@ const Login = () => {
         e.preventDefault();
 
         try {
-            const obj = await axios.post('http://127.0.0.1:4000/api/auth/login', {
+            const obj = await axios.post('https://aero-management-1.onrender.com/api/auth/login', {
                 email,
                 password
             }, {
