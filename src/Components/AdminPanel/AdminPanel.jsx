@@ -63,7 +63,7 @@ const AdminPanel = () => {
 
     const fetchFlights = async () => {
         try {
-            const response = await axios.get('http://localhost:4000/flights');
+            const response = await axios.get('https://aero-management-1.onrender.com/flights');
             setFlights(response.data.flights);
         } catch (error) {
             console.error('Error fetching flights:', error);
@@ -93,7 +93,7 @@ const AdminPanel = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:4000/flights', flightData, {
+            const response = await axios.post('https://aero-management-1.onrender.com/flights', flightData, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -119,7 +119,7 @@ const AdminPanel = () => {
     const handleUpdate = async (e, flaggedFlight) => {
         e.preventDefault();
         try {
-            const response = await axios.put(`http://localhost:4000/flights/${flaggedFlight}`, flightData, {
+            const response = await axios.put(`https://aero-management-1.onrender.com/flights/${flaggedFlight}`, flightData, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -146,7 +146,7 @@ const AdminPanel = () => {
 
     const handleFlag = async (flightId) => {
         try {
-            const { data } = await axios.get(`http://localhost:4000/flights/${flightId}`);
+            const { data } = await axios.get(`https://aero-management-1.onrender.com/flights/${flightId}`);
             const { from, to, arrivalTime, departureTime, airlines } = data.flights;
 
             setFlightData({ ...flightData, from, to, arrivalTime, departureTime, airlines });
@@ -174,7 +174,7 @@ const AdminPanel = () => {
 
     const handleDelete = async (flightId) => {
         try {
-            const response = await axios.delete(`http://localhost:4000/flights/${flightId}`);
+            const response = await axios.delete(`https://aero-management-1.onrender.com/flights/${flightId}`);
             console.log('Flight deleted successfully:', response.data);
             fetchFlights(); // Refresh flights list
             alert('Flight deleted successfully!');
