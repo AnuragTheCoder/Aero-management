@@ -23,7 +23,7 @@ const Explore = ({ myFlights, setMyFlights }) => {
         // Fetch cities data from an API or use a predefined list
         const fetchCities = async () => {
             try {
-                const response = await axios.get('http://localhost:4000/cities');
+                const response = await axios.get('https://aero-management-1.onrender.com/cities');
                 const cities = response.data.cities;
                 let citiArr = [];
                 for (let i = 0; i < cities.length; i++) {
@@ -62,7 +62,7 @@ const Explore = ({ myFlights, setMyFlights }) => {
 
     const handleSearch = async () => {
         try {
-            const response = await axios.get(`http://localhost:4000/flights/search`, {
+            const response = await axios.get(`https://aero-management-1.onrender.com/flights/search`, {
                 params: {
                     from: fromCity,
                     to: toCity,
