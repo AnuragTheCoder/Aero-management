@@ -21,7 +21,7 @@ export const AuthProvider = ({ children }) => {
                 if (token) {
                     // Verify the token with the backend
                     const response = await axios.post(
-                        'http://127.0.0.1:4000/api/auth/verifyToken',
+                        'https://aero-management-1.onrender.com/api/auth/verifyToken',
                         { token },
                         { withCredentials: true }
                     );
