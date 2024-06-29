@@ -108,6 +108,11 @@ const MyFlights = ({ myFlights, setMyFlights }) => {
                             <div className='w-1/2 h-[30px]'>
                                 <p className='text-sm text-gray-100  max-w-[200px] truncate text-center'>{user.email}</p>
                             </div>
+                            {user.email==="anurag"&&
+                            <div className='w-1/2 h-[30px]'>
+                                <Link to="/adminPanel"><p className='text-sm text-gray-100  max-w-[200px] truncate text-center'>Admin Panel</p></Link>
+                            </div>
+                            }
                             <button onClick={handleLogout} className='p-2 w-1/2 h-1/3 mt-2 text-sm rounded-md bg-red-400 border-4 border-red-700 hover:bg-red-600'>Logout</button>
                             <Link to="/myflights" className='p-2  h-1/3 mt-2 text-sm rounded-md bg-green-400 border-4 border-green-700 hover:bg-green-600'>My Flights</Link>
                         </div>
