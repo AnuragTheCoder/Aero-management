@@ -27,7 +27,7 @@ dotenv.config();
 
 
 app.use(cors({
-    origin: ['http://127.0.0.1:3003', 'http://localhost:3003','https://aero-management-3.onrender.com/', 'http://localhost:3000', 'http://127.0.0.1:3000', 'http://127.0.0.1:3002', 'http://localhost:3002', 'http://127.0.0.1:3001', 'http://localhost:3001'],
+    origin: ['http://127.0.0.1:3003', 'http://localhost:3003','https://aero-management-3.onrender.com', 'http://localhost:3000', 'http://127.0.0.1:3000', 'http://127.0.0.1:3002', 'http://localhost:3002', 'http://127.0.0.1:3001', 'http://localhost:3001'],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true // Allow credentials
