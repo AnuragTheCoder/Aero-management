@@ -29,7 +29,7 @@ const MyFlights = ({ myFlights, setMyFlights }) => {
             const updateFlights = async () => {
                 if (myFlights.length > 0) {
                     try {
-                        const response = await axios.put(`http://localhost:4000/updateManyFlights/${user._id}`, {
+                        const response = await axios.put(`https://aero-management-1.onrender.com/updateManyFlights/${user._id}`, {
                             flights: refinedFlights
                         }, {
                             headers: {
@@ -46,7 +46,7 @@ const MyFlights = ({ myFlights, setMyFlights }) => {
             const getMyFlights = async () => {
 
                 try {
-                    const response = await axios.get(`http://localhost:4000/getManyFlights/${user._id}`);
+                    const response = await axios.get(`https://aero-management-1.onrender.com/getManyFlights/${user._id}`);
                     setMyFlights((prev) => [...prev, ...response.data.bookedFlights]);
                     console.log(response.data);
                 } catch (err) {
@@ -72,7 +72,7 @@ const MyFlights = ({ myFlights, setMyFlights }) => {
         const refinedFlights = updatedFlights.map(({ id, ...rest }) => rest);
         const updateFlights = async () => {
             try {
-                const response = await axios.delete(`http://localhost:4000/deleteManyFlights/${user._id}`, {
+                const response = await axios.delete(`https://aero-management-1.onrender.com/deleteManyFlights/${user._id}`, {
                     flights: refinedFlights
                 }, {
                     headers: {
