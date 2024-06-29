@@ -19,7 +19,7 @@ const Registration = () => {
         e.preventDefault();
         if (check) {
             try {
-                const obj = await axios.post('http://127.0.0.1:4000/api/auth/register', {
+                const obj = await axios.post('https://aero-management-1.onrender.com/api/auth/register', {
                     name,
                     email,
                     password
